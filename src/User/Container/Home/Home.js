@@ -1,6 +1,73 @@
 import React from "react";
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 function Home(props) {
+  let vegetableOwlCarousel = {
+    autoplay: true,
+    smartSpeed: 1500,
+    center: false,
+    dots: true,
+    loop: true,
+    margin: 25,
+    nav: true,
+    navText: [
+      '<div class="owl-prev"><i class="bi bi-arrow-left"></i></div>',
+      '<div class="owl-next"><i class="bi bi-arrow-right"></i></div>',
+    ],
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      576: {
+        items: 1,
+      },
+      768: {
+        items: 2,
+      },
+      992: {
+        items: 3,
+      },
+      1200: {
+        items: 4,
+      },
+    },
+  };
+
+  let testimonialOwlCarousel = {
+    autoplay: true,
+    smartSpeed: 2000,
+    center: false,
+    dots: true,
+    loop: true,
+    margin: 25,
+    nav: true,
+    navText: [
+      '<div class="owl-prev"><i class="bi bi-arrow-left"></i></div>',
+      '<div class="owl-next"><i class="bi bi-arrow-right"></i></div>',
+    ],
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      576: {
+        items: 1,
+      },
+      768: {
+        items: 1,
+      },
+      992: {
+        items: 2,
+      },
+      1200: {
+        items: 2,
+      },
+    },
+  };
+
   return (
     <div>
       {/* Hero Start */}
@@ -926,7 +993,10 @@ function Home(props) {
       <div className="container-fluid vesitable py-5">
         <div className="container py-5">
           <h1 className="mb-0">Fresh Organic Vegetables</h1>
-          <div className="owl-carousel vegetable-carousel justify-content-center">
+          <OwlCarousel
+            {...vegetableOwlCarousel}
+            className="owl-carousel vegetable-carousel justify-content-center"
+          >
             <div className="border border-primary rounded position-relative vesitable-item">
               <div className="vesitable-img">
                 <img
@@ -1183,7 +1253,7 @@ function Home(props) {
                 </div>
               </div>
             </div>
-          </div>
+          </OwlCarousel>
         </div>
       </div>
       {/* Vesitable Shop End */}
@@ -1606,7 +1676,10 @@ function Home(props) {
             <h4 className="text-primary">Our Testimonial</h4>
             <h1 className="display-5 mb-5 text-dark">Our Client Saying!</h1>
           </div>
-          <div className="owl-carousel testimonial-carousel">
+          <OwlCarousel
+            {...testimonialOwlCarousel}
+            className="owl-carousel testimonial-carousel"
+          >
             <div className="testimonial-item img-border-radius bg-light rounded p-4">
               <div className="position-relative">
                 <i
@@ -1715,7 +1788,7 @@ function Home(props) {
                 </div>
               </div>
             </div>
-          </div>
+          </OwlCarousel>
         </div>
       </div>
       {/* Tastimonial End */}
