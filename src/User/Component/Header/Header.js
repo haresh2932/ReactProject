@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Header(props) {
   return (
@@ -53,15 +54,15 @@ function Header(props) {
                 id="navbarCollapse"
               >
                 <div className="navbar-nav mx-auto">
-                  <a href="index.html" className="nav-item nav-link active">
+                  <NavLink to="/" className="nav-item nav-link active">
                     Home
-                  </a>
-                  <a href="shop.html" className="nav-item nav-link">
+                  </NavLink>
+                  <NavLink to="/shop" className="nav-item nav-link">
                     Shop
-                  </a>
-                  <a href="shop-detail.html" className="nav-item nav-link">
+                  </NavLink>
+                  <NavLink to="/shop_details" className="nav-item nav-link">
                     Shop Detail
-                  </a>
+                  </NavLink>
                   <div className="nav-item dropdown">
                     <a
                       href="#"
@@ -71,23 +72,23 @@ function Header(props) {
                       Pages
                     </a>
                     <div className="dropdown-menu m-0 bg-secondary rounded-0">
-                      <a href="cart.html" className="dropdown-item">
+                      <NavLink to="/cart" className="dropdown-item">
                         Cart
-                      </a>
-                      <a href="chackout.html" className="dropdown-item">
+                      </NavLink>
+                      <NavLink to="/checkout" className="dropdown-item">
                         Chackout
-                      </a>
-                      <a href="testimonial.html" className="dropdown-item">
+                      </NavLink>
+                      <NavLink to="/testimonial" className="dropdown-item">
                         Testimonial
-                      </a>
-                      <a href="404.html" className="dropdown-item">
+                      </NavLink>
+                      <NavLink to="/pages404" className="dropdown-item">
                         404 Page
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
-                  <a href="contact.html" className="nav-item nav-link">
+                  <NavLink to="/contact" className="nav-item nav-link">
                     Contact
-                  </a>
+                  </NavLink>
                 </div>
                 <div className="d-flex m-3 me-0">
                   <button

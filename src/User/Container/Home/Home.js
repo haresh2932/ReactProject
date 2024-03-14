@@ -1325,7 +1325,7 @@ function Home(props) {
                   </div>
                   <div className="col-6">
                     <a href="#" className="h5">
-                      Organic Tomato
+                      Organic Oranges
                     </a>
                     <div className="d-flex my-3">
                       <i className="fas fa-star text-primary" />
@@ -1358,7 +1358,7 @@ function Home(props) {
                   </div>
                   <div className="col-6">
                     <a href="#" className="h5">
-                      Organic Tomato
+                      Organic Raspberries
                     </a>
                     <div className="d-flex my-3">
                       <i className="fas fa-star text-primary" />
@@ -1391,7 +1391,7 @@ function Home(props) {
                   </div>
                   <div className="col-6">
                     <a href="#" className="h5">
-                      Organic Tomato
+                      Organic Banana
                     </a>
                     <div className="d-flex my-3">
                       <i className="fas fa-star text-primary" />
@@ -1424,7 +1424,7 @@ function Home(props) {
                   </div>
                   <div className="col-6">
                     <a href="#" className="h5">
-                      Organic Tomato
+                      Organic Apricots
                     </a>
                     <div className="d-flex my-3">
                       <i className="fas fa-star text-primary" />
@@ -1457,7 +1457,7 @@ function Home(props) {
                   </div>
                   <div className="col-6">
                     <a href="#" className="h5">
-                      Organic Tomato
+                      Organic Grapes
                     </a>
                     <div className="d-flex my-3">
                       <i className="fas fa-star text-primary" />
@@ -1490,7 +1490,7 @@ function Home(props) {
                   </div>
                   <div className="col-6">
                     <a href="#" className="h5">
-                      Organic Tomato
+                      Organic Apple
                     </a>
                     <div className="d-flex my-3">
                       <i className="fas fa-star text-primary" />
@@ -1520,7 +1520,7 @@ function Home(props) {
                 />
                 <div className="py-4">
                   <a href="#" className="h5">
-                    Organic Tomato
+                    Organic Oranges
                   </a>
                   <div className="d-flex my-3 justify-content-center">
                     <i className="fas fa-star text-primary" />
@@ -1549,7 +1549,7 @@ function Home(props) {
                 />
                 <div className="py-4">
                   <a href="#" className="h5">
-                    Organic Tomato
+                    Organic Raspberries
                   </a>
                   <div className="d-flex my-3 justify-content-center">
                     <i className="fas fa-star text-primary" />
@@ -1578,7 +1578,7 @@ function Home(props) {
                 />
                 <div className="py-4">
                   <a href="#" className="h5">
-                    Organic Tomato
+                    Organic Banana
                   </a>
                   <div className="d-flex my-3 justify-content-center">
                     <i className="fas fa-star text-primary" />
@@ -1607,7 +1607,7 @@ function Home(props) {
                 />
                 <div className="py-2">
                   <a href="#" className="h5">
-                    Organic Tomato
+                    Organic Apricots
                   </a>
                   <div className="d-flex my-3 justify-content-center">
                     <i className="fas fa-star text-primary" />
