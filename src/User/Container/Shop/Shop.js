@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Shop(props) {
-  const [shopData, setShopData] = useState("");
+  const [shopData, setShopData] = useState([]);
+  const [count, setCount] = useState({})
+
   useEffect(() => {
     getData();
   }, []);
@@ -10,9 +12,10 @@ function Shop(props) {
   const getData = async () => {
     const respons = await fetch("http://localhost:8000/fruits");
     const data = await respons.json();
-    console.log(data);
-
+    
     setShopData(data);
+    setCount(data)
+    
   };
 
   return (
@@ -80,7 +83,7 @@ function Shop(props) {
                             <div className="d-flex justify-content-between fruite-name">
                               <a href="#">
                                 <i className="fas fa-apple-alt me-2" />
-                                Apples
+                                Grapes
                               </a>
                               <span>(3)</span>
                             </div>
@@ -89,16 +92,7 @@ function Shop(props) {
                             <div className="d-flex justify-content-between fruite-name">
                               <a href="#">
                                 <i className="fas fa-apple-alt me-2" />
-                                Oranges
-                              </a>
-                              <span>(5)</span>
-                            </div>
-                          </li>
-                          <li>
-                            <div className="d-flex justify-content-between fruite-name">
-                              <a href="#">
-                                <i className="fas fa-apple-alt me-2" />
-                                Strawbery
+                                Raspberries
                               </a>
                               <span>(2)</span>
                             </div>
@@ -107,18 +101,27 @@ function Shop(props) {
                             <div className="d-flex justify-content-between fruite-name">
                               <a href="#">
                                 <i className="fas fa-apple-alt me-2" />
-                                Banana
+                                Apricots
                               </a>
-                              <span>(8)</span>
+                              <span>(1)</span>
                             </div>
                           </li>
                           <li>
                             <div className="d-flex justify-content-between fruite-name">
                               <a href="#">
                                 <i className="fas fa-apple-alt me-2" />
-                                Pumpkin
+                                Banana
                               </a>
-                              <span>(5)</span>
+                              <span>(1)</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div className="d-flex justify-content-between fruite-name">
+                              <a href="#">
+                                <i className="fas fa-apple-alt me-2" />
+                                Oranges
+                              </a>
+                              <span>(2)</span>
                             </div>
                           </li>
                         </ul>
@@ -327,7 +330,7 @@ function Shop(props) {
                       shopData.map((item, index) => {
                         return (
                           <div className="col-md-6 col-lg-6 col-xl-4">
-                            <Link to="/shop/1">
+                            <Link to={`/shop/${item.id}`}>
                               <div className="rounded position-relative fruite-item">
                                 <div className="fruite-img">
                                   <img
@@ -347,7 +350,7 @@ function Shop(props) {
                                   <p>{item.description}</p>
                                   <div className="d-flex justify-content-between flex-lg-wrap">
                                     <p className="text-dark fs-5 fw-bold mb-0">
-                                      ${item.price}
+                                      ${item.price} / kg
                                     </p>
                                     <a
                                       href="#"

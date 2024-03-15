@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function Shop_Details(props) {
+  const [shopDetails, setShopDetails] = useState({});
+
   const { id } = useParams();
 
-  console.log(id);
+  try {
+    useEffect(() => {
+      getData();
+    }, []);
 
+    const getData = async () => {
+      const respons = await fetch("http://localhost:8000/fruits");
+      const data = await respons.json();
+
+      const shopDetailsData = data.find((v) => v.id == id);
+
+      setShopDetails(shopDetailsData);
+    };
+  } catch (error) {}
 
   return (
     <div>
@@ -33,7 +47,7 @@ function Shop_Details(props) {
                   <div className="border rounded">
                     <a href="#">
                       <img
-                        src="img/single-item.jpg"
+                        src={`../${shopDetails?.image}`}
                         className="img-fluid rounded"
                         alt="Image"
                       />
@@ -41,9 +55,9 @@ function Shop_Details(props) {
                   </div>
                 </div>
                 <div className="col-lg-6">
-                  <h4 className="fw-bold mb-3">Brocoli</h4>
+                  <h4 className="fw-bold mb-3">{shopDetails?.name}</h4>
                   <p className="mb-3">Category: Vegetables</p>
-                  <h5 className="fw-bold mb-3">3,35 $</h5>
+                  <h5 className="fw-bold mb-3">{shopDetails?.price} $</h5>
                   <div className="d-flex mb-4">
                     <i className="fa fa-star text-secondary" />
                     <i className="fa fa-star text-secondary" />
@@ -51,10 +65,7 @@ function Shop_Details(props) {
                     <i className="fa fa-star text-secondary" />
                     <i className="fa fa-star" />
                   </div>
-                  <p className="mb-4">
-                    The generated Lorem Ipsum is therefore always free from
-                    repetition injected humour, or non-characteristic words etc.
-                  </p>
+                  <p className="mb-4">{shopDetails?.description}</p>
                   <p className="mb-4">
                     Susp endisse ultricies nisi vel quam suscipit. Sabertooth
                     peacock flounder; chain pickerel hatchetfish, pencilfish
