@@ -1,6 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 function Shop_Details(props) {
+  const { id } = useParams();
+
+  console.log(id);
+
+
   return (
     <div>
       {/* Single Page Header start */}
