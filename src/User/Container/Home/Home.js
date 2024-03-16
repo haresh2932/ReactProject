@@ -69,7 +69,7 @@ function Home(props) {
   };
 
   return (
-    <div>
+    <div>....................
       {/* Hero Start */}
       <div className="container-fluid py-5 mb-5 hero-header">
         <div className="container py-5">
