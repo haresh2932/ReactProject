@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Shop(props) {
   const [shopData, setShopData] = useState([]);
@@ -7,8 +7,6 @@ function Shop(props) {
   const [type, setType] = useState([]);
   const [search, setSearchData] = useState("");
   const [protype, setProType] = useState("");
-  
-  let { id } = useParams();
 
   useEffect(() => {
     getData();
@@ -41,7 +39,6 @@ function Shop(props) {
 
   const enddata = lastData();
 
-
   return (
     <div>
       {/* Single Page Header start */}
@@ -58,7 +55,6 @@ function Shop(props) {
         </ol>
       </div>
       {/* Single Page Header End */}
-
       {/* Fruits Shop Start*/}
       <div className="container-fluid fruite py-5">
         <div className="container py-5">
@@ -113,12 +109,7 @@ function Shop(props) {
                                   {n}
                                 </a>
                                 <span>
-                                  (
-                                  {
-                                    shopData.filter((v) => v.name === n)
-                                      .length
-                                  }
-                                  )
+                                  {shopData.filter((v) => v.name === n).length}
                                 </span>
                               </div>
                             </li>
@@ -301,7 +292,7 @@ function Shop(props) {
                             </div>
                             <div
                               className="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                              style={{ top: 10, left: 10 }}
+                              style={{ top: 10, left: 10, textAlign: "center" }}
                             >
                               Fruits
                             </div>
@@ -310,7 +301,7 @@ function Shop(props) {
                               <p>{v.description}</p>
                               <div className="d-flex justify-content-between flex-lg-wrap">
                                 <p className="text-dark fs-5 fw-bold mb-0">
-                                  ${v.price} / kg
+                                  $ {v.price} / kg
                                 </p>
                                 <a
                                   href="#"
