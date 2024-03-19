@@ -1,14 +1,18 @@
-import React from 'react';
-import Products from '../Admin/Component/Products/Products';
-import { Route, Routes } from 'react-router-dom'
-
+import React from "react";
+import Fruites from "../Admin/Container/Fruites/Fruites";
+import { Route, Routes } from "react-router-dom";
+import Layout from "../Admin/Component/Layout/Layout";
+import Vegetables from "../Admin/Container/Vegetable/Vegetables";
 
 function AdminRoutes(props) {
-    return (
-        <Routes>
-            <Route exact path="/products" element={<Products />} />
-        </Routes>
-    );
+  return (
+    <Layout>
+      <Routes>
+        <Route exact path="/fruites" element={<Fruites />} />
+        <Route exact path="/vegetables" element={<Vegetables />} />
+      </Routes>
+    </Layout>
+  );
 }
 
 export default AdminRoutes;
