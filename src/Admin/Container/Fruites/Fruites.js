@@ -12,7 +12,6 @@ import {
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
-
 function Fruites(props) {
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
@@ -74,7 +73,7 @@ function Fruites(props) {
 
   return (
     <div>
-      <h2>Product Admin</h2>
+      <h2>Fruite Admin</h2>
       <Button variant="contained">Add product </Button>
       <Box sx={{ height: 400, width: "100%" }}>
         <DataGrid
@@ -149,6 +148,17 @@ function Fruites(props) {
               name="price"
               label="Price"
               type="number"
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              autoFocus
+              required
+              margin="dense"
+              id="type"
+              name="type"
+              label="Type"
+              type="text"
               fullWidth
               variant="standard"
             />
