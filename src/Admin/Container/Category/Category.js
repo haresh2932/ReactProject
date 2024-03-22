@@ -4,58 +4,109 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+// import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from "@mui/material/DialogTitle";
-import { object, string } from "yup";
+import { object, string, number, date, InferType } from "yup";
 import { useFormik } from "formik";
 import { DataGrid } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
-import { GridRowModes, GridActionsCellItem } from "@mui/x-data-grid";
+import { useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { IconButton } from "@mui/material";
 
 export default function Category() {
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = React.useState([]);
+  const [edit, setEdit] = React.useState(null);
 
-  const rNo = Math.floor(Math.random() * 1000);
+  const handleDelete = (data) => {
+    console.log("626", data.id);
+    const removeEL = JSON.parse(localStorage.getItem("category"));
+    const newElm = removeEL.filter((v) => v.id !== data.id);
+
+    localStorage.setItem("category", JSON.stringify(newElm));
+    getData();
+  };
+
+  const handleEdit = (data) => {
+    console.log(data);
+    formik.setValues(data);
+    setEdit(data.id);
+    setOpen(true);
+  };
+
+  const columns = [
+    {
+      field: "category_name",
+      headerName: "Name",
+      width: 130,
+    },
+    {
+      field: "category_description",
+      headerName: "Description",
+      width: 130,
+    },
+    {
+      field: "Action",
+      headerName: "Action",
+      width: 200,
+      renderCell: ({ row }) => (
+        <>
+          <IconButton onClick={(event) => handleEdit(row)} variant="contained">
+            <EditIcon />
+          </IconButton>
+
+          <IconButton
+            onClick={(event) => handleDelete(row)}
+            variant="contained"
+          >
+            <DeleteIcon />
+          </IconButton>
+        </>
+      ),
+    },
+  ];
+
+  const getData = () => {
+    const localdata = JSON.parse(localStorage.getItem("category"));
+    if (localdata) {
+      setData(localdata);
+    }
+  };
 
   useEffect(() => {
     getData();
   }, []);
 
-  const getData = () => {
-    const localData = JSON.parse(localStorage.getItem("category"));
-    if (localData) {
-      setData(localData);
-    }
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleAdd = (values) => {
-    const localData = JSON.parse(localStorage.getItem("category")) || [];
-    const newData = [...localData, { ...values, id: rNo }];
-    localStorage.setItem("category", JSON.stringify(newData));
-    setData(newData);
-    handleClose();
-  };
-
-  const handleDelete = (id) => {
-    const newData = data.filter((item) => item.id !== id);
-    localStorage.setItem("category", JSON.stringify(newData));
-    setData(newData);
-  };
-
-  const categorySchema = object({
+  let categorySchema = object({
     category_name: string().required(),
-    category_description: string().required().min(10),
+    category_description: string().required(),
   });
+
+  const handleAdd = (data) => {
+    const rId = Math.floor(Math.random() * 10000);
+    console.log(data);
+    const localdata = JSON.parse(localStorage.getItem("category"));
+
+    if (localdata) {
+      localdata.push({ ...data, id: rId });
+      localStorage.setItem("category", JSON.stringify(localdata));
+    } else {
+      localStorage.setItem(
+        "category",
+        JSON.stringify([{ ...data, id: "rId" }])
+      );
+    }
+    getData();
+  };
+
+  const handleUpdateData = (data) => {
+    const localdata = JSON.parse(localStorage.getItem("category"));
+    const index = localdata.findIndex((v) => v.id === data.id);
+    localdata[index] = data;
+    localStorage.setItem("category", JSON.stringify(localdata));
+    getData();
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -63,46 +114,34 @@ export default function Category() {
       category_description: "",
     },
     validationSchema: categorySchema,
-    onSubmit: handleAdd,
+    onSubmit: (values, { resetForm }) => {
+      if (edit) {
+        handleUpdateData(values);
+      } else {
+        handleAdd(values);
+      }
+      resetForm();
+      handleClose();
+    },
   });
 
-  const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
+  const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
     formik;
 
-  const columns = [
-    { field: "category_name", headerName: "Name", width: 130 },
-    { field: "category_description", headerName: "Description", width: 130 },
-    {
-      field: "actions",
-      headerName: "Actions",
-      width: 150,
-      renderCell: ({ row }) => (
-        <ActionsCell
-          row={row}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-        />
-      ),
-    },
-  ];
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-  const ActionsCell = ({ row, handleEdit, handleDelete }) => {
-    return (
-      <div>
-        <Button onClick={() => handleEdit(row.id)}>
-          <EditIcon />
-        </Button>
-        <Button onClick={() => handleDelete(row.id)}>
-          <DeleteIcon />
-        </Button>
-      </div>
-    );
+  const handleClose = () => {
+    setOpen(false);
+    formik.resetForm();
+    setEdit(null);
   };
 
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        Add Category
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={handleSubmit}>
@@ -110,49 +149,51 @@ export default function Category() {
           <DialogContent>
             <TextField
               margin="dense"
+              id="category_name"
               name="category_name"
-              label="Name"
+              label="Enter category name"
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.category_name}
               error={
-                errors.category_name && touched.category_name ? true : false
+                touched.category_name && errors.category_name ? true : false
               }
               helperText={
-                errors.category_name && touched.category_name
+                touched.category_name && errors.category_name
                   ? errors.category_name
                   : ""
               }
             />
             <TextField
-              margin="dense"
-              name="category_description"
-              label="Description"
-              type="text"
-              fullWidth
-              variant="standard"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.category_description}
               error={
-                errors.category_description && touched.category_description
+                touched.category_description && errors.category_description
                   ? true
                   : false
               }
+              margin="dense"
+              id="description"
+              name="category_description"
+              label="category_description"
+              type="text"
+              fullWidth
+              variant="outlined"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.category_description}
               helperText={
-                errors.category_description && touched.category_description
+                touched.category_description && errors.category_description
                   ? errors.category_description
                   : ""
               }
             />
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button type="submit">{edit ? "Update" : "Add"}</Button>
+            </DialogActions>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button type="submit">Add</Button>
-          </DialogActions>
         </form>
       </Dialog>
       <div style={{ height: 400, width: "100%" }}>
@@ -164,6 +205,7 @@ export default function Category() {
               paginationModel: { page: 0, pageSize: 5 },
             },
           }}
+          pageSizeOptions={[5, 10]}
           checkboxSelection
         />
       </div>
