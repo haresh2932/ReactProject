@@ -1,77 +1,172 @@
-import React, { useEffect } from "react";
-import { object, string, number, date, InferType } from "yup";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import { object, string } from "yup";
 import { useFormik } from "formik";
+import { DataGrid } from "@mui/x-data-grid";
+import { useEffect, useState } from "react";
+import { GridRowModes, GridActionsCellItem } from "@mui/x-data-grid";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
-function Category(props) {
+export default function Category() {
+  const [open, setOpen] = React.useState(false);
+  const [data, setData] = useState([]);
+
+  const rNo = Math.floor(Math.random() * 1000);
+
   useEffect(() => {
     getData();
   }, []);
 
-  const getData = async () => {
-    const response = await fetch("http://localhost:8000/fruits");
-    const data = await response.json();
-
-    console.log(data);
+  const getData = () => {
+    const localData = JSON.parse(localStorage.getItem("category"));
+    if (localData) {
+      setData(localData);
+    }
   };
 
-  let categorySchema = object({
-    category: string().required("Please enter category"),
-    description: string()
-      .required()
-      .min(10, "Description is atleast 10 charecter long."),
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleAdd = (values) => {
+    const localData = JSON.parse(localStorage.getItem("category")) || [];
+    const newData = [...localData, { ...values, id: rNo }];
+    localStorage.setItem("category", JSON.stringify(newData));
+    setData(newData);
+    handleClose();
+  };
+
+  const handleDelete = (id) => {
+    const newData = data.filter((item) => item.id !== id);
+    localStorage.setItem("category", JSON.stringify(newData));
+    setData(newData);
+  };
+
+  const categorySchema = object({
+    category_name: string().required(),
+    category_description: string().required().min(10),
   });
 
   const formik = useFormik({
     initialValues: {
-      category: "",
-      description: "",
+      category_name: "",
+      category_description: "",
     },
     validationSchema: categorySchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null));
-    },
+    onSubmit: handleAdd,
   });
 
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     formik;
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="category"
-          className="w-10 form-control border-0 py-3 mb-4"
-          placeholder="Your Category"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.category}
+  const columns = [
+    { field: "category_name", headerName: "Name", width: 130 },
+    { field: "category_description", headerName: "Description", width: 130 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: ({ row }) => (
+        <ActionsCell
+          row={row}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
         />
-        <span className="error">
-          {touched.category && errors.category ? errors.category : ""}
-        </span>
-        <input
-          type="text"
-          name="description"
-          className="w-10 form-control border-0 py-3 mb-4"
-          placeholder="Enter Your Description"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.description}
-        />
-        <span className="error">
-          {touched.description && errors.description ? errors.description : ""}
-        </span>
+      ),
+    },
+  ];
 
-        <button
-          className="w-10 btn form-control border-secondary py-3 bg-white text-primary "
-          type="submit"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+  const ActionsCell = ({ row, handleEdit, handleDelete }) => {
+    return (
+      <div>
+        <Button onClick={() => handleEdit(row.id)}>
+          <EditIcon />
+        </Button>
+        <Button onClick={() => handleDelete(row.id)}>
+          <DeleteIcon />
+        </Button>
+      </div>
+    );
+  };
+
+  return (
+    <React.Fragment>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        Open form dialog
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <form onSubmit={handleSubmit}>
+          <DialogTitle>Category</DialogTitle>
+          <DialogContent>
+            <TextField
+              margin="dense"
+              name="category_name"
+              label="Name"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.category_name}
+              error={
+                errors.category_name && touched.category_name ? true : false
+              }
+              helperText={
+                errors.category_name && touched.category_name
+                  ? errors.category_name
+                  : ""
+              }
+            />
+            <TextField
+              margin="dense"
+              name="category_description"
+              label="Description"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.category_description}
+              error={
+                errors.category_description && touched.category_description
+                  ? true
+                  : false
+              }
+              helperText={
+                errors.category_description && touched.category_description
+                  ? errors.category_description
+                  : ""
+              }
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit">Add</Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={data}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          checkboxSelection
+        />
+      </div>
+    </React.Fragment>
   );
 }
-
-export default Category;

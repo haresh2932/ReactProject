@@ -18,8 +18,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import LunchDiningOutlinedIcon from "@mui/icons-material/LunchDiningOutlined";
 import BakeryDiningOutlinedIcon from "@mui/icons-material/BakeryDiningOutlined";
-import CategoryIcon from '@mui/icons-material/Category';
+import CategoryIcon from "@mui/icons-material/Category";
 import { NavLink } from "react-router-dom";
+
 
 const drawerWidth = 240;
 
@@ -102,6 +103,11 @@ export default function Layout({ children }) {
 
   const applink = [
     {
+      title: "Category",
+      icon: <CategoryIcon />,
+      to: "/admin/category",
+    },
+    {
       title: "Fruites",
       icon: <LunchDiningOutlinedIcon />,
       to: "/admin/fruites",
@@ -111,11 +117,6 @@ export default function Layout({ children }) {
       icon: <BakeryDiningOutlinedIcon />,
       to: "/admin/vegetables",
     },
-    {
-      title: "Category",
-      icon: <CategoryIcon />,
-      to: "/admin/category",
-    }
   ];
 
   return (
@@ -158,7 +159,7 @@ export default function Layout({ children }) {
               disablePadding
               sx={{ display: "block" }}
               component={NavLink}
-              to = {value.to}
+              to={value.to}
             >
               <ListItemButton
                 sx={{
