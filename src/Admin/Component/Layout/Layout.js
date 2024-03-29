@@ -20,6 +20,7 @@ import LunchDiningOutlinedIcon from "@mui/icons-material/LunchDiningOutlined";
 import BakeryDiningOutlinedIcon from "@mui/icons-material/BakeryDiningOutlined";
 import CategoryIcon from "@mui/icons-material/Category";
 import { NavLink } from "react-router-dom";
+import StreamIcon from '@mui/icons-material/Stream';
 
 
 const drawerWidth = 240;
@@ -116,6 +117,11 @@ export default function Layout({ children }) {
       title: "Vegetables",
       icon: <BakeryDiningOutlinedIcon />,
       to: "/admin/vegetables",
+    },
+    {
+      title: "Facilities",
+      icon: <StreamIcon />,
+      to: "/admin/facilities",
     },
   ];
 
