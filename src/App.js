@@ -4,7 +4,7 @@ import UserRoutes from "./Routes/UserRoutes";
 import AdminRoutes from "./Routes/AdminRoutes";
 import PrivateRoutes from "./Routes/PrivateRoutes";
 import { Provider } from "react-redux";
-import { configureStore } from "./Admin/Container/Facilities/Redux/store";
+import { configureStore } from "./Redux/store";
 
 function App() {
   const store = configureStore();
