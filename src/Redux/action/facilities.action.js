@@ -5,8 +5,15 @@ import {
   LOADING_FACILITIES,
 } from "../ActionType";
 
+export const handleLoading = () => (dispatch) => {
+  dispatch({ type: LOADING_FACILITIES });
+};
+
 export const addFacilities = (data) => (dispatch) => {
-  dispatch({ type: ADD_FACILITIES, payload: data });
+  dispatch(handleLoading());
+  setTimeout(() => {
+    dispatch({ type: ADD_FACILITIES, payload: data });
+  }, 2000);
 };
 
 export const deleteFacilities = (id) => (dispatch) => {
@@ -19,7 +26,3 @@ export const editFacilities = (data) => (dispatch) => {
     payload: data,
   });
 };
-
-export const loadingFacilities = () => (dispatch) => {
-  dispatch({type: LOADING_FACILITIES})
-}

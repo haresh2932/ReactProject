@@ -14,24 +14,30 @@ const initialState = {
 export const facilitiesReducer = (state = initialState, action) => {
   console.log(action);
   switch (action.type) {
+    case LOADING_FACILITIES:
+      return {
+        ...state,
+        isloading: true,
+      };
+
     case ADD_FACILITIES:
       return {
         ...state,
-        isLoading : false,
+        isloading: false,
         facilities: state.facilities.concat(action.payload),
       };
 
     case DELETE_FACILITIES:
       return {
         ...state,
-        isLoading : false,
+        isloading: false,
         facilities: state.facilities.filter((v) => v.id !== action.payload),
       };
 
     case EDIT_FACILITIES:
       return {
         ...state,
-        isLoading : false,
+        isloading: false,
         facilities: state.facilities.map((v) => {
           if (v.id === action.payload.id) {
             return action.payload;
@@ -41,11 +47,6 @@ export const facilitiesReducer = (state = initialState, action) => {
         }),
       };
 
-    case LOADING_FACILITIES:
-      return {
-        ...state,
-        isloading: true
-      }
     default:
       return state;
   }

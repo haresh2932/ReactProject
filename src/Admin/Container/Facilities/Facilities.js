@@ -17,6 +17,7 @@ import {
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Facilities(props) {
   const [open, setOpen] = React.useState(false);
@@ -100,65 +101,73 @@ function Facilities(props) {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add facilities
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Facilities</DialogTitle>
-        <form onSubmit={handleSubmit}>
-          <DialogContent>
-            <TextField
-              margin="dense"
-              id="name"
-              name="name"
-              label="Facilities name"
-              type="text"
-              fullWidth
-              variant="outlined"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.name}
-              error={errors.name && touched.name ? true : false}
-              helperText={errors.name && touched.name ? errors.name : ""}
+      {facilities.isloading ? 
+        <CircularProgress />
+      : 
+        <>
+          <Button variant="outlined" onClick={handleClickOpen}>
+            Add facilities
+          </Button>
+          <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Facilities</DialogTitle>
+            <form onSubmit={handleSubmit}>
+              <DialogContent>
+                <TextField
+                  margin="dense"
+                  id="name"
+                  name="name"
+                  label="Facilities name"
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                  error={errors.name && touched.name ? true : false}
+                  helperText={errors.name && touched.name ? errors.name : ""}
+                />
+                <TextField
+                  margin="dense"
+                  id="name"
+                  name="description"
+                  label="Facilities description"
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.description}
+                  error={
+                    errors.description && touched.description ? true : false
+                  }
+                  helperText={
+                    errors.description && touched.description
+                      ? errors.description
+                      : ""
+                  }
+                />
+                <DialogActions>
+                  <Button onClick={handleClose}>Cancel</Button>
+                  <Button type="submit">{update ? "Update" : "Add"}</Button>
+                </DialogActions>
+              </DialogContent>
+            </form>
+          </Dialog>
+          <div style={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={facilities.facilities}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 5 },
+                },
+              }}
+              pageSizeOptions={[5, 10]}
+              checkboxSelection
             />
-            <TextField
-              margin="dense"
-              id="name"
-              name="description"
-              label="Facilities description"
-              type="text"
-              fullWidth
-              variant="outlined"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.description}
-              error={errors.description && touched.description ? true : false}
-              helperText={
-                errors.description && touched.description
-                  ? errors.description
-                  : ""
-              }
-            />
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button type="submit">{update ? "Update" : "Add"}</Button>
-            </DialogActions>
-          </DialogContent>
-        </form>
-      </Dialog>
-      <div style={{ height: 400, width: "100%" }}>
-        <DataGrid
-          rows={facilities.facilities}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-        />
-      </div>
+          </div>
+        </>
+      }
     </>
   );
 }
