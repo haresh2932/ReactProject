@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 function Home(props) {
   const facilities = useSelector((state) => state.facilities);
+  
 
   let vegetableOwlCarousel = {
     autoplay: true,
