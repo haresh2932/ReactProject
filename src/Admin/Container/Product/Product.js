@@ -15,16 +15,20 @@ import { useFormik } from "formik";
 import { number, object, string } from "yup";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { getProduct } from "../../../Redux/action/product.action";
+import {
+  addProduct,
+  deleteProduct,
+  editProduct,
+  getProduct,
+} from "../../../Redux/action/product.action";
 
 function Product(props) {
   const [open, setOpen] = React.useState(false);
   const [edit, setEdit] = useState(false);
+  const dispatch = useDispatch();
 
   const product = useSelector((state) => state.product);
   console.log(product);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProduct());
@@ -48,8 +52,7 @@ function Product(props) {
   };
 
   const handleDelete = (id) => {
-    console.log(id);
-    dispatch();
+    dispatch(deleteProduct(id));
   };
 
   const columns = [
@@ -101,7 +104,9 @@ function Product(props) {
     validationSchema: productSchema,
     onSubmit: (values, { resetForm }) => {
       if (edit) {
+        dispatch(editProduct(values));
       } else {
+        dispatch(addProduct(values));
       }
       resetForm();
       handleClose();
@@ -116,7 +121,7 @@ function Product(props) {
         Add product
       </Button>
       <Box sx={{ height: 400, width: "100%" }}>
-        {/* <DataGrid
+        <DataGrid
           rows={product.product}
           columns={columns}
           initialState={{
@@ -129,7 +134,7 @@ function Product(props) {
           pageSizeOptions={[5]}
           checkboxSelection
           disableRowSelectionOnClick
-        /> */}
+        />
       </Box>
       <Dialog
         // dir='rtl'

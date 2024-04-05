@@ -5,7 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { object, string, number, date, InferType } from "yup";
+import { object, string } from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
@@ -66,7 +66,7 @@ function Facilities(props) {
   });
 
   const handleDelete = (id) => {
-    dispatch(deleteFacilities(id));
+    dispatch();
   };
 
   const handleEdit = (data) => {
@@ -101,9 +101,9 @@ function Facilities(props) {
 
   return (
     <>
-      {facilities.isloading ? 
+      {facilities.isloading ? (
         <CircularProgress />
-      : 
+      ) : (
         <>
           <Button variant="outlined" onClick={handleClickOpen}>
             Add facilities
@@ -167,7 +167,7 @@ function Facilities(props) {
             />
           </div>
         </>
-      }
+      )}
     </>
   );
 }
