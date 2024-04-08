@@ -23,7 +23,7 @@ import {
 } from "../../../Redux/action/product.action";
 
 function Product(props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState  (false);
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
 

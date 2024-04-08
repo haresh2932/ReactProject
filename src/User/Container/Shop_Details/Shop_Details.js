@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { object, string, number, date, InferType } from "yup";
+import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addShopDetail,
+  displayReview,
+} from "../../../Redux/action/shopDetail.action";
+import Rating from "@mui/material/Rating";
+import { TextField } from "@mui/material";
 
 function Shop_Details(props) {
   const [shopDetails, setShopDetails] = useState({});
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.shopData);
+  console.log(data);
 
   const { id } = useParams();
 
   try {
     useEffect(() => {
       getData();
+      dispatch(displayReview());
     }, []);
 
     const getData = async () => {
-      const respons = await fetch("http://localhost:8000/fruits");
+      const respons = await fetch("http://localhost:8000/product");
       const data = await respons.json();
 
       const shopDetailsData = data.find((v) => v.id == id);
@@ -20,6 +33,31 @@ function Shop_Details(props) {
       setShopDetails(shopDetailsData);
     };
   } catch (error) {}
+
+  let reviewSchema = object({
+    name: string().required(),
+    email: string().email().required(),
+    review: string().required(),
+    rating: number().min(1).max(5),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      productId: id,
+      name: "",
+      email: "",
+      review: "",
+      rating: 0,
+    },
+    validationSchema: reviewSchema,
+    onSubmit: (values, { resetForm }) => {
+      dispatch(addShopDetail(values));
+      resetForm();
+    },
+  });
+
+  const { handleBlur, handleChange, handleSubmit, values, touched, errors } =
+    formik;
 
   return (
     <div>
@@ -270,38 +308,63 @@ function Shop_Details(props) {
                     </div>
                   </div>
                 </div>
-                <form action="#">
+                <form action="#" onSubmit={handleSubmit}>
                   <h4 className="mb-5 fw-bold">Leave a Reply</h4>
                   <div className="row g-4">
                     <div className="col-lg-6">
                       <div className="border-bottom rounded">
-                        <input
+                        <TextField
                           type="text"
+                          name="name"
+                          id="name"
                           className="form-control border-0 me-4"
-                          placeholder="Yur Name *"
+                          placeholder="Your Name"
+                          value={values.name}
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          error={touched.name && errors.name ? true : false}
+                          helperText={
+                            touched.name && errors.name ? errors.name : ""
+                          }
                         />
                       </div>
                     </div>
                     <div className="col-lg-6">
                       <div className="border-bottom rounded">
-                        <input
+                        <TextField
                           type="email"
                           className="form-control border-0"
-                          placeholder="Your Email *"
+                          placeholder="Your Email"
+                          name="email"
+                          id="email"
+                          value={values.email}
+                          error={touched.email && errors.email ? true : false}
+                          helperText={
+                            touched.email && errors.email ? errors.email : ""
+                          }
+                          onBlur={handleBlur}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
                     <div className="col-lg-12">
                       <div className="border-bottom rounded my-4">
-                        <textarea
-                          name
-                          id
+                        <TextField
+                          name="review"
+                          id="review"
                           className="form-control border-0"
                           cols={30}
                           rows={8}
                           placeholder="Your Review *"
                           spellCheck="false"
                           defaultValue={""}
+                          value={values.review}
+                          error={touched.review && errors.review ? true : false}
+                          helperText={
+                            touched.review && errors.review ? errors.review : ""
+                          }
+                          onBlur={handleBlur}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -313,20 +376,29 @@ function Shop_Details(props) {
                             className="d-flex align-items-center"
                             style={{ fontSize: 12 }}
                           >
-                            <i className="fa fa-star text-muted" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" />
+                            <Rating
+                              name="rating"
+                              value={values.rating}
+                              onBlur={handleBlur}
+                              onChange={handleChange}
+                              error={
+                                touched.rating && errors.rating ? true : false
+                              }
+                              helperText={
+                                touched.rating && errors.rating
+                                  ? errors.rating
+                                  : ""
+                              }
+                            />
                           </div>
                         </div>
-                        <a
-                          href="#"
+                        <button
+                          type="submit"
                           className="btn border border-secondary text-primary rounded-pill px-4 py-3"
                         >
                           {" "}
                           Post Comment
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -601,6 +673,14 @@ function Shop_Details(props) {
               </div>
             </div>
           </div>
+          {data.shopData.map((v) => (
+            <>
+              <h4>{v.name}</h4>
+              <p>{v.email}</p>
+              <p>{v.review}</p>
+              <p>{v.rating}</p>
+            </>
+          ))}
           <h1 className="fw-bold mb-0">Related products</h1>
           <div className="vesitable">
             <div className="owl-carousel vegetable-carousel justify-content-center">

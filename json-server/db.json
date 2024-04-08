@@ -72,5 +72,76 @@
       "price": 4.99,
       "type": "discount"
     }
+  ],
+  "review": [
+    {
+      "id": "3b1b",
+      "name": "rtuyyhd",
+      "email": "abhishekchotaliya005@gmail.com",
+      "review": "dbdfbcvbcv n",
+      "rating": "4"
+    },
+    {
+      "id": "2efa",
+      "name": "rtuyyhd",
+      "email": "svsvs31231@gmail.com",
+      "review": "xvxcvxcbcxadadfgvvn v",
+      "rating": "5"
+    },
+    {
+      "id": "d22d",
+      "name": "tyhing",
+      "email": "abhishekchotaliya005@gmail.com",
+      "review": "cxbnvcxc xvb",
+      "rating": "2"
+    },
+    {
+      "id": "b897",
+      "productId": "1",
+      "name": "rtuyyhd",
+      "email": "BC548@gmail.com",
+      "review": "xvdgnfbvxcv nnvvb",
+      "rating": "4"
+    },
+    {
+      "id": "79dd",
+      "productId": "5",
+      "name": "grepas",
+      "email": "svsvs31231@gmail.com",
+      "review": "fngnfdzfngnggdfdsshdsg",
+      "rating": "5"
+    },
+    {
+      "id": "ea49",
+      "productId": "5",
+      "name": "grepas",
+      "email": "dladva03@gmail.com",
+      "review": "adfjhgfdas,dgd",
+      "rating": "3"
+    },
+    {
+      "id": "0f9d",
+      "productId": "5",
+      "name": "rtuyyhd",
+      "email": "BC548@gmail.com",
+      "review": "zdngzbcbxv",
+      "rating": "4"
+    },
+    {
+      "id": "4fcb",
+      "productId": "8",
+      "name": "tye",
+      "email": "svad23@gmail.com",
+      "review": "asdcvvcxvxzvcxfxv",
+      "rating": "2"
+    },
+    {
+      "id": "29a7",
+      "productId": "8",
+      "name": "grepas",
+      "email": "svsvs31231@gmail.com",
+      "review": "zxcvbbnn,.",
+      "rating": "4"
+    }
   ]
 }

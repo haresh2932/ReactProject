@@ -8,7 +8,7 @@ export const configureStore = () => {
   const persistConfig = {
     key: "root",
     storage,
-    whitelist: ['facilities', 'product']
+    whitelist: ['shopData']
   };
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);
