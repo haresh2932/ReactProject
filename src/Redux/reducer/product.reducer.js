@@ -2,6 +2,8 @@ import {
   ADD_PRODUCT,
   DELETE_PRODUCT,
   EDIT_PRODUCT,
+  ERROR_PRODUCT,
+  LOADING_PRODUCT,
   PRODUCT_DATA,
 } from "../ActionType";
 
@@ -14,6 +16,18 @@ const initialValues = {
 export const productReducer = (state = initialValues, action) => {
   console.log(action);
   switch (action.type) {
+    case LOADING_PRODUCT:
+      return {
+        ...state,
+        isloading: true,
+      };
+
+    case ERROR_PRODUCT:
+      return {
+        ...state,
+        isloading: false,
+        error: action.payload,
+      };
     case PRODUCT_DATA:
       return {
         isloading: false,

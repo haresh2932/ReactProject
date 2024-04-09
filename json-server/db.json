@@ -33,14 +33,6 @@
       "type": "discount"
     },
     {
-      "id": "5",
-      "image": "img/fruite-item-3.jpg",
-      "name": "Banana",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt",
-      "price": 4.99,
-      "type": "expired"
-    },
-    {
       "id": "6",
       "image": "img/fruite-item-1.jpg",
       "name": "Oranges",
@@ -75,72 +67,19 @@
   ],
   "review": [
     {
-      "id": "3b1b",
+      "id": "f37a",
+      "productId": "3",
       "name": "rtuyyhd",
-      "email": "abhishekchotaliya005@gmail.com",
-      "review": "dbdfbcvbcv n",
-      "rating": "4"
-    },
-    {
-      "id": "2efa",
-      "name": "rtuyyhd",
-      "email": "svsvs31231@gmail.com",
-      "review": "xvxcvxcbcxadadfgvvn v",
+      "email": "Abhishekchotaliya@gmail.com",
+      "review": "cvcxcxvcxvb",
       "rating": "5"
     },
     {
-      "id": "d22d",
-      "name": "tyhing",
-      "email": "abhishekchotaliya005@gmail.com",
-      "review": "cxbnvcxc xvb",
-      "rating": "2"
-    },
-    {
-      "id": "b897",
-      "productId": "1",
+      "id": "eb7d",
+      "productId": "3",
       "name": "rtuyyhd",
       "email": "BC548@gmail.com",
-      "review": "xvdgnfbvxcv nnvvb",
-      "rating": "4"
-    },
-    {
-      "id": "79dd",
-      "productId": "5",
-      "name": "grepas",
-      "email": "svsvs31231@gmail.com",
-      "review": "fngnfdzfngnggdfdsshdsg",
-      "rating": "5"
-    },
-    {
-      "id": "ea49",
-      "productId": "5",
-      "name": "grepas",
-      "email": "dladva03@gmail.com",
-      "review": "adfjhgfdas,dgd",
-      "rating": "3"
-    },
-    {
-      "id": "0f9d",
-      "productId": "5",
-      "name": "rtuyyhd",
-      "email": "BC548@gmail.com",
-      "review": "zdngzbcbxv",
-      "rating": "4"
-    },
-    {
-      "id": "4fcb",
-      "productId": "8",
-      "name": "tye",
-      "email": "svad23@gmail.com",
-      "review": "asdcvvcxvxzvcxfxv",
-      "rating": "2"
-    },
-    {
-      "id": "29a7",
-      "productId": "8",
-      "name": "grepas",
-      "email": "svsvs31231@gmail.com",
-      "review": "zxcvbbnn,.",
+      "review": "qwwertyuiop",
       "rating": "4"
     }
   ]

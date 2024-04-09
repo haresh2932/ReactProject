@@ -237,64 +237,37 @@ function Shop_Details(props) {
                       role="tabpanel"
                       aria-labelledby="nav-mission-tab"
                     >
-                      <div className="d-flex">
-                        <img
-                          src="img/avatar.jpg"
-                          className="img-fluid rounded-circle p-3"
-                          style={{ width: 100, height: 100 }}
-                          alt
-                        />
-                        <div className>
-                          <p className="mb-2" style={{ fontSize: 14 }}>
-                            April 12, 2024
-                          </p>
-                          <div className="d-flex justify-content-between">
-                            <h5>Jason Smith</h5>
-                            <div className="d-flex mb-3">
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star" />
+                      {data.isloading ? (
+                        <p>Loading....</p>
+                      ) : data.error ? (
+                        <p>{data.error}</p>
+                      ) : (
+                        data.shopData.map((v, index) => (
+                          <>
+                            <div>
+                              {/* <img
+                                src="img/avatar.jpg"
+                                className="img-fluid rounded-circle p-3"
+                                style={{ width: 100, height: 100 }}
+                                alt
+                              /> */}
+                              <div className>
+                                <div className="d-flex justify-content-between">
+                                  <h5>{v.name}</h5>
+                                  <div className="d-flex mb-3">
+                                    <Rating
+                                      name="read-only"
+                                      value={v.rating}
+                                      readOnly
+                                    />
+                                  </div>
+                                </div>
+                                <p className="text-dark">{v.review}</p>
+                              </div>
                             </div>
-                          </div>
-                          <p>
-                            The generated Lorem Ipsum is therefore always free
-                            from repetition injected humour, or
-                            non-characteristic words etc. Susp endisse ultricies
-                            nisi vel quam suscipit{" "}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="d-flex">
-                        <img
-                          src="img/avatar.jpg"
-                          className="img-fluid rounded-circle p-3"
-                          style={{ width: 100, height: 100 }}
-                          alt
-                        />
-                        <div className>
-                          <p className="mb-2" style={{ fontSize: 14 }}>
-                            April 12, 2024
-                          </p>
-                          <div className="d-flex justify-content-between">
-                            <h5>Sam Peters</h5>
-                            <div className="d-flex mb-3">
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star text-secondary" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                            </div>
-                          </div>
-                          <p className="text-dark">
-                            The generated Lorem Ipsum is therefore always free
-                            from repetition injected humour, or
-                            non-characteristic words etc. Susp endisse ultricies
-                            nisi vel quam suscipit{" "}
-                          </p>
-                        </div>
-                      </div>
+                          </>
+                        ))
+                      )}
                     </div>
                     <div className="tab-pane" id="nav-vision" role="tabpanel">
                       <p className="text-dark">
@@ -673,14 +646,7 @@ function Shop_Details(props) {
               </div>
             </div>
           </div>
-          {data.shopData.map((v) => (
-            <>
-              <h4>{v.name}</h4>
-              <p>{v.email}</p>
-              <p>{v.review}</p>
-              <p>{v.rating}</p>
-            </>
-          ))}
+
           <h1 className="fw-bold mb-0">Related products</h1>
           <div className="vesitable">
             <div className="owl-carousel vegetable-carousel justify-content-center">

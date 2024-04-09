@@ -23,7 +23,7 @@ import {
 } from "../../../Redux/action/product.action";
 
 function Product(props) {
-  const [open, setOpen] = useState  (false);
+  const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
 
@@ -45,7 +45,6 @@ function Product(props) {
   };
 
   const handleEdit = (data) => {
-    console.log(data);
     formik.setValues(data);
     setEdit(true);
     setOpen(true);
@@ -116,88 +115,94 @@ function Product(props) {
   const { handleBlur, handleChange, handleSubmit, values, touched, errors } =
     formik;
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen} dir="rtl">
-        Add product
-      </Button>
-      <Box sx={{ height: 400, width: "100%" }}>
-        <DataGrid
-          rows={product.product}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
-              },
-            },
-          }}
-          pageSizeOptions={[5]}
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
-      </Box>
-      <Dialog
-        // dir='rtl'
-        open={open}
-        onClose={handleClose}
-      >
-        <form onSubmit={handleSubmit}>
-          <DialogTitle>Add Product</DialogTitle>
-          <DialogContent>
-            <TextField
-              margin="dense"
-              id="name"
-              name="name"
-              label="Enter Fruite name"
-              type="text"
-              fullWidth
-              variant="standard"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.name}
-              error={touched.name && errors.name ? true : false}
-              helperText={touched.name && errors.name ? errors.name : ""}
+    <>
+      {product.isloading ? (
+        <p>loading.....</p>
+      ) : product.error ? (
+        <p>{product.error}</p>
+      ) : (
+        <>
+          <Button variant="outlined" onClick={handleClickOpen} dir="rtl">
+            Add product
+          </Button>
+          <Box sx={{ height: 400, width: "100%" }}>
+            <DataGrid
+              rows={product.product}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: {
+                    pageSize: 5,
+                  },
+                },
+              }}
+              pageSizeOptions={[5]}
+              checkboxSelection
+              disableRowSelectionOnClick
             />
-            <TextField
-              margin="dense"
-              id="description"
-              name="description"
-              label="Description"
-              type="text"
-              fullWidth
-              variant="standard"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.description}
-              error={touched.description && errors.description ? true : false}
-              helperText={
-                touched.description && errors.description
-                  ? errors.description
-                  : ""
-              }
-            />
-            <TextField
-              margin="dense"
-              id="price"
-              name="price"
-              label="Price"
-              type="number"
-              fullWidth
-              variant="standard"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.price}
-              error={touched.price && errors.price ? true : false}
-              helperText={touched.price && errors.price ? errors.price : ""}
-            />
-            <DialogActions>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button type="submit">{edit ? "Update" : "Add"}</Button>
-            </DialogActions>
-          </DialogContent>
-        </form>
-      </Dialog>
-    </div>
+          </Box>
+          <Dialog open={open} onClose={handleClose}>
+            <form onSubmit={handleSubmit}>
+              <DialogTitle>Add Product</DialogTitle>
+              <DialogContent>
+                <TextField
+                  margin="dense"
+                  id="name"
+                  name="name"
+                  label="Enter Fruite name"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                  error={touched.name && errors.name ? true : false}
+                  helperText={touched.name && errors.name ? errors.name : ""}
+                />
+                <TextField
+                  margin="dense"
+                  id="description"
+                  name="description"
+                  label="Description"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.description}
+                  error={
+                    touched.description && errors.description ? true : false
+                  }
+                  helperText={
+                    touched.description && errors.description
+                      ? errors.description
+                      : ""
+                  }
+                />
+                <TextField
+                  margin="dense"
+                  id="price"
+                  name="price"
+                  label="Price"
+                  type="number"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.price}
+                  error={touched.price && errors.price ? true : false}
+                  helperText={touched.price && errors.price ? errors.price : ""}
+                />
+                <DialogActions>
+                  <Button onClick={handleClose}>Cancel</Button>
+                  <Button type="submit">{edit ? "Update" : "Add"}</Button>
+                </DialogActions>
+              </DialogContent>
+            </form>
+          </Dialog>
+        </>
+      )}
+    </>
   );
 }
 
