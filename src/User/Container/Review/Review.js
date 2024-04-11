@@ -16,7 +16,7 @@ function Review(props) {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.review);
   const { id } = useParams();
-  const [edit, setEdit] = useState0(false);
+  const [edit, setEdit] = useState(false);
 
   let reviewSchema = object({
     name: string().required(),
@@ -162,6 +162,7 @@ function Review(props) {
               <div className>
                 <div className="d-flex justify-content-between">
                   <h5>{v.name}</h5>
+                  <p className="text-dark">{v.review}</p>
                   <div className="d-flex mb-3">
                     <Rating name="read-only" value={v.rating} readOnly />
                     <IconButton
@@ -179,7 +180,6 @@ function Review(props) {
                     </IconButton>
                   </div>
                 </div>
-                <p className="text-dark">{v.review}</p>
               </div>
             </div>
           </>

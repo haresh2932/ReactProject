@@ -80,7 +80,7 @@
       "name": "tyhing",
       "email": "svsvs31231@gmail.com",
       "review": "kjkkmjkjii",
-      "rating": "4"
+      "rating": "1"
     },
     {
       "id": "c78a",
@@ -88,7 +88,63 @@
       "name": "haresh",
       "email": "haresh@gmail.com",
       "review": "cxbvnbxvvcvc",
+      "rating": "2"
+    },
+    {
+      "id": "1e29",
+      "productId": "2",
+      "name": "tye",
+      "email": "Abhishekchotaliya@gmail.com",
+      "review": "cvx,c,mvcnvcx,vxnm,cvmxnvxckvnxcjknvhksb",
+      "rating": "3"
+    },
+    {
+      "id": "707a",
+      "productId": "2",
+      "name": "Free Shipping",
+      "email": "svsvs31231@gmail.com",
+      "review": "cxbvnbxvvcvc",
+      "rating": "4"
+    },
+    {
+      "id": "9357",
+      "productId": "2",
+      "name": "rtuyyhd",
+      "email": "svad23@gmail.com",
+      "review": "uhjujnkinoj",
       "rating": "5"
+    },
+    {
+      "id": "f5bb",
+      "productId": "2",
+      "name": "Free Shipping",
+      "email": "dladva03@gmail.com",
+      "review": "cvcxcxvcxvb",
+      "rating": "4"
+    },
+    {
+      "id": "7c62",
+      "productId": "2",
+      "name": "tyhing",
+      "email": "BC548@gmail.com",
+      "review": "qwwertyuiop",
+      "rating": "3"
+    },
+    {
+      "id": "4774",
+      "productId": "2",
+      "name": "qwwer",
+      "email": "svsvs31231@gmail.com",
+      "review": "scfsdxgfgjhkjjkl.",
+      "rating": "2"
+    },
+    {
+      "id": "2893",
+      "productId": "2",
+      "name": "Free",
+      "email": "svsvs31231@gmail.com",
+      "review": "cvx,c,mvcnvcx,vxnm",
+      "rating": "1"
     }
   ]
 }
