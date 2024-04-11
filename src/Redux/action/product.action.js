@@ -22,7 +22,7 @@ export const getProduct = () => async (dispatch) => {
     dispatch(loadingProduct());
 
     await axios
-      .get(BASE_URL + "product")
+      .get(BASE_URL + "products")
       .then((response) => {
         dispatch({ type: PRODUCT_DATA, payload: response.data });
       })

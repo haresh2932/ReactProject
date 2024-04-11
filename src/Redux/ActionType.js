@@ -14,3 +14,6 @@ export const GET_SHOPDATA = "GET_SHOPDATA";
 export const ADD_SHOPDATA = "ADD_SHOPDATA";
 export const LOADING_SHOPDATA = "LOADING_SHOPDATA";
 export const ERROR_SHOPDATA = "ERROR_SHOPDATA";
+export const DELETE_REVIEW = "DELETE_REVIEW";
+export const EDIT_REVIEW = "EDIT_REVIEW";
+

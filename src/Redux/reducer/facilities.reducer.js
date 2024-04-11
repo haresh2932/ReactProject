@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export const facilitiesReducer = (state = initialState, action) => {
-  console.log("facility",action);
+  
   switch (action.type) {
     case LOADING_FACILITIES:
       return {

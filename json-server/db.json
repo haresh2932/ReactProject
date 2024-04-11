@@ -63,24 +63,32 @@
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt",
       "price": 4.99,
       "type": "discount"
+    },
+    {
+      "id": "9",
+      "image": "img/fruite-item-1.jpg",
+      "name": "Oranges",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt",
+      "price": 4.99,
+      "type": "discount"
     }
   ],
   "review": [
     {
-      "id": "f37a",
-      "productId": "3",
-      "name": "rtuyyhd",
-      "email": "Abhishekchotaliya@gmail.com",
-      "review": "cvcxcxvcxvb",
-      "rating": "5"
+      "id": "b1fe",
+      "productId": "7",
+      "name": "tyhing",
+      "email": "svsvs31231@gmail.com",
+      "review": "kjkkmjkjii",
+      "rating": "4"
     },
     {
-      "id": "eb7d",
-      "productId": "3",
-      "name": "rtuyyhd",
-      "email": "BC548@gmail.com",
-      "review": "qwwertyuiop",
-      "rating": "4"
+      "id": "c78a",
+      "productId": "7",
+      "name": "haresh",
+      "email": "haresh@gmail.com",
+      "review": "cxbvnbxvvcvc",
+      "rating": "5"
     }
   ]
 }

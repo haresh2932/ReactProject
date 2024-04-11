@@ -14,7 +14,7 @@ const initialValues = {
 };
 
 export const productReducer = (state = initialValues, action) => {
-  console.log(action);
+  
   switch (action.type) {
     case LOADING_PRODUCT:
       return {

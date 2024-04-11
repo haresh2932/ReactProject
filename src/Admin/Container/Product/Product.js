@@ -28,7 +28,6 @@ function Product(props) {
   const dispatch = useDispatch();
 
   const product = useSelector((state) => state.product);
-  console.log(product);
 
   useEffect(() => {
     dispatch(getProduct());

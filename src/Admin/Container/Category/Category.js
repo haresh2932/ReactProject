@@ -20,7 +20,6 @@ export default function Category() {
   const [edit, setEdit] = React.useState(null);
 
   const handleDelete = (data) => {
-    console.log("626", data.id);
     const removeEL = JSON.parse(localStorage.getItem("category"));
     const newElm = removeEL.filter((v) => v.id !== data.id);
 
@@ -29,7 +28,6 @@ export default function Category() {
   };
 
   const handleEdit = (data) => {
-    console.log(data);
     formik.setValues(data);
     setEdit(data.id);
     setOpen(true);
@@ -85,7 +83,6 @@ export default function Category() {
 
   const handleAdd = (data) => {
     const rId = Math.floor(Math.random() * 10000);
-    console.log(data);
     const localdata = JSON.parse(localStorage.getItem("category"));
 
     if (localdata) {

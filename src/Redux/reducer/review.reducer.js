@@ -1,5 +1,7 @@
 import {
   ADD_SHOPDATA,
+  DELETE_REVIEW,
+  EDIT_REVIEW,
   ERROR_SHOPDATA,
   GET_SHOPDATA,
   LOADING_SHOPDATA,
@@ -7,12 +9,11 @@ import {
 
 const initialState = {
   isloading: false,
-  shopData: [],
+  review: [],
   error: null,
 };
 
-export const shopReducer = (state = initialState, action) => {
-  console.log(action);
+export const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOADING_SHOPDATA:
       return {
@@ -29,16 +30,31 @@ export const shopReducer = (state = initialState, action) => {
     case GET_SHOPDATA:
       return {
         isloading: false,
-        shopData: action.payload,
+        review: action.payload,
         error: null,
       };
     case ADD_SHOPDATA:
       return {
         isloading: false,
-        shopData: state.shopData.concat(action.payload),
+        review: state.review.concat(action.payload),
         error: null,
       };
 
+    case DELETE_REVIEW:
+      return {
+        isloading: false,
+        review: state.review.filter((v) => v.id !== action.payload),
+        error: null,
+      };
+
+    case EDIT_REVIEW:
+      return {
+        isloading: false,
+        review: state.review.map((v) =>
+          v.id === action.payload.id ? action.payload : v
+        ),
+        error: null
+      };
     default:
       return state;
   }
