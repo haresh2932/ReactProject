@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  displayReview,
-} from "../../../Redux/action/review.action";
+import { useDispatch } from "react-redux";
+import { displayReview } from "../../../Redux/action/review.action";
 import Review from "../Review/Review";
-import { addCart } from "../../../Redux/action/addcart.action";
+import { addToCart } from "../../../Redux/slice/cart.slice";
 
 function Shop_Details(props) {
   const [shopDetails, setShopDetails] = useState({});
   const dispatch = useDispatch();
-  
+
   const { id } = useParams();
 
-  const handleAddCart = (values) => {
-    dispatch(addCart(values));
-  }
+  const handleCart = (values) => {
+    dispatch(addToCart(values));
+  };
 
   try {
     useEffect(() => {
@@ -106,7 +104,7 @@ function Shop_Details(props) {
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
-                    onClick={handleAddCart(id)}
+                    onClick={handleCart(id)}
                   >
                     <i className="fa fa-shopping-bag me-2 text-primary" /> Add
                     to cart
@@ -211,8 +209,7 @@ function Shop_Details(props) {
                       id="nav-mission"
                       role="tabpanel"
                       aria-labelledby="nav-mission-tab"
-                    >
-                    </div>
+                    ></div>
                     <div className="tab-pane" id="nav-vision" role="tabpanel">
                       <p className="text-dark">
                         Tempor erat elitr rebum at clita. Diam dolor diam ipsum

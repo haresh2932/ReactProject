@@ -4,7 +4,7 @@ import { decrement, increment } from "../../../Redux/slice/counter.slice";
 
 function Counter(props) {
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.counter);
+  const count = useSelector((state) => state.counter.count);
 
   const handleInc = () => {
     dispatch(increment());
@@ -16,7 +16,7 @@ function Counter(props) {
   return (
     <div>
       <button onClick={handleInc}>+</button>
-      {count.counter}
+      {count}
       <button onClick={handleDec}>-</button>
     </div>
   );
