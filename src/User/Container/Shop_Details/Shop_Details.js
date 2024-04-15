@@ -5,13 +5,17 @@ import {
   displayReview,
 } from "../../../Redux/action/review.action";
 import Review from "../Review/Review";
+import { addCart } from "../../../Redux/action/addcart.action";
 
 function Shop_Details(props) {
   const [shopDetails, setShopDetails] = useState({});
   const dispatch = useDispatch();
   
-
   const { id } = useParams();
+
+  const handleAddCart = (values) => {
+    dispatch(addCart(values));
+  }
 
   try {
     useEffect(() => {
@@ -102,6 +106,7 @@ function Shop_Details(props) {
                   <a
                     href="#"
                     className="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
+                    onClick={handleAddCart(id)}
                   >
                     <i className="fa fa-shopping-bag me-2 text-primary" /> Add
                     to cart

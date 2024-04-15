@@ -17,3 +17,4 @@ export const ERROR_SHOPDATA = "ERROR_SHOPDATA";
 export const DELETE_REVIEW = "DELETE_REVIEW";
 export const EDIT_REVIEW = "EDIT_REVIEW";
 
+export const ADD_CART = "ADD_CART"
