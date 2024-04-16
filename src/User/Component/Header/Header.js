@@ -99,7 +99,13 @@ function Header(props) {
                     <i className="fas fa-search text-primary" />
                   </button>
                   <a href="#" className="position-relative me-4 my-auto">
-                    <i className="fa fa-shopping-bag fa-2x" />
+                    <NavLink
+                      to="/cart"
+                      // className="dropdown-item"
+                    >
+                      <i className="fa fa-shopping-bag fa-2x" />
+                    </NavLink>
+
                     <span
                       className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                       style={{
@@ -109,7 +115,7 @@ function Header(props) {
                         minWidth: 20,
                       }}
                     >
-                      3
+                      {}
                     </span>
                   </a>
                   <a href="#" className="my-auto">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { displayReview } from "../../../Redux/action/review.action";
 import Review from "../Review/Review";
 import { addToCart } from "../../../Redux/slice/cart.slice";
@@ -9,11 +9,14 @@ function Shop_Details(props) {
   const [shopDetails, setShopDetails] = useState({});
   const dispatch = useDispatch();
 
+  const cart = useSelector(state => state.cart)
+  console.log(cart);
+
   const { id } = useParams();
 
-  const handleCart = (values) => {
-    dispatch(addToCart(values));
-  };
+  const handleCart = () => {
+    dispatch(addToCart(id))
+  }
 
   try {
     useEffect(() => {
@@ -101,14 +104,13 @@ function Shop_Details(props) {
                       </button>
                     </div>
                   </div>
-                  <a
-                    href="#"
+                  <button
                     className="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
-                    onClick={handleCart(id)}
+                    onClick={handleCart}
                   >
                     <i className="fa fa-shopping-bag me-2 text-primary" /> Add
                     to cart
-                  </a>
+                  </button>
                 </div>
                 <div className="col-lg-12">
                   <nav>
