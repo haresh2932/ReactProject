@@ -1,6 +1,28 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { incrementQty } from "../../../Redux/slice/cart.slice";
 
 function Cart(props) {
+  const cart = useSelector((state) => state.cart);
+  const products = useSelector((state) => state.product);
+
+  console.log(cart, products);
+  
+  const productData = cart.cart.map((v) => {
+    const product = products.product.find((v1) => v1.id === v.pid);
+    
+    return { ...product, qty: v.qty };
+  });
+  
+  console.log(productData);
+  
+  const dispatch = useDispatch()
+  const countQty = useSelector(state => state.cart.count)
+
+  const handleCartQty = () => {
+    dispatch(incrementQty())
+  };
+
   return (
     <div>
       {/* Single Page Header start */}
@@ -33,150 +55,59 @@ function Cart(props) {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">
-                    <div className="d-flex align-items-center">
-                      <img
-                        src="img/vegetable-item-3.png"
-                        className="img-fluid me-5 rounded-circle"
-                        style={{ width: 80, height: 80 }}
-                        alt
-                      />
-                    </div>
-                  </th>
-                  <td>
-                    <p className="mb-0 mt-4">Big Banana</p>
-                  </td>
-                  <td>
-                    <p className="mb-0 mt-4">2.99 $</p>
-                  </td>
-                  <td>
-                    <div
-                      className="input-group quantity mt-4"
-                      style={{ width: 100 }}
-                    >
-                      <div className="input-group-btn">
-                        <button className="btn btn-sm btn-minus rounded-circle bg-light border">
-                          <i className="fa fa-minus" />
-                        </button>
+                {productData.map((p) => (
+                  <tr>
+                    <th scope="row">
+                      <div className="d-flex align-items-center">
+                        <img
+                          src={p.image}
+                          className="img-fluid me-5 rounded-circle"
+                          style={{ width: 80, height: 80 }}
+                          alt
+                        />
                       </div>
-                      <input
-                        type="text"
-                        className="form-control form-control-sm text-center border-0"
-                        defaultValue={1}
-                      />
-                      <div className="input-group-btn">
-                        <button className="btn btn-sm btn-plus rounded-circle bg-light border">
-                          <i className="fa fa-plus" />
-                        </button>
+                    </th>
+                    <td>
+                      <p className="mb-0 mt-4">{p.name}</p>
+                    </td>
+                    <td>
+                      <p className="mb-0 mt-4">{p.price} $</p>
+                    </td>
+                    <td>
+                      <div
+                        className="input-group quantity mt-4"
+                        style={{ width: 100 }}
+                      >
+                        <div className="input-group-btn">
+                          <button className="btn btn-sm btn-minus rounded-circle bg-light border">
+                            <i className="fa fa-minus" />
+                          </button>
+                        </div>
+                        <input
+                          type="text"
+                          className="form-control form-control-sm text-center border-0"
+                          defaultValue={countQty}
+                        />
+                        <div className="input-group-btn">
+                          <button
+                            onClick={handleCartQty}
+                            className="btn btn-sm btn-plus rounded-circle bg-light border"
+                          >
+                            <i className="fa fa-plus" />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p className="mb-0 mt-4">2.99 $</p>
-                  </td>
-                  <td>
-                    <button className="btn btn-md rounded-circle bg-light border mt-4">
-                      <i className="fa fa-times text-danger" />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div className="d-flex align-items-center">
-                      <img
-                        src="img/vegetable-item-5.jpg"
-                        className="img-fluid me-5 rounded-circle"
-                        style={{ width: 80, height: 80 }}
-                        alt
-                      />
-                    </div>
-                  </th>
-                  <td>
-                    <p className="mb-0 mt-4">Potatoes</p>
-                  </td>
-                  <td>
-                    <p className="mb-0 mt-4">2.99 $</p>
-                  </td>
-                  <td>
-                    <div
-                      className="input-group quantity mt-4"
-                      style={{ width: 100 }}
-                    >
-                      <div className="input-group-btn">
-                        <button className="btn btn-sm btn-minus rounded-circle bg-light border">
-                          <i className="fa fa-minus" />
-                        </button>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control form-control-sm text-center border-0"
-                        defaultValue={1}
-                      />
-                      <div className="input-group-btn">
-                        <button className="btn btn-sm btn-plus rounded-circle bg-light border">
-                          <i className="fa fa-plus" />
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p className="mb-0 mt-4">2.99 $</p>
-                  </td>
-                  <td>
-                    <button className="btn btn-md rounded-circle bg-light border mt-4">
-                      <i className="fa fa-times text-danger" />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div className="d-flex align-items-center">
-                      <img
-                        src="img/vegetable-item-2.jpg"
-                        className="img-fluid me-5 rounded-circle"
-                        style={{ width: 80, height: 80 }}
-                        alt
-                      />
-                    </div>
-                  </th>
-                  <td>
-                    <p className="mb-0 mt-4">Awesome Brocoli</p>
-                  </td>
-                  <td>
-                    <p className="mb-0 mt-4">2.99 $</p>
-                  </td>
-                  <td>
-                    <div
-                      className="input-group quantity mt-4"
-                      style={{ width: 100 }}
-                    >
-                      <div className="input-group-btn">
-                        <button className="btn btn-sm btn-minus rounded-circle bg-light border">
-                          <i className="fa fa-minus" />
-                        </button>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control form-control-sm text-center border-0"
-                        defaultValue={1}
-                      />
-                      <div className="input-group-btn">
-                        <button className="btn btn-sm btn-plus rounded-circle bg-light border">
-                          <i className="fa fa-plus" />
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p className="mb-0 mt-4">2.99 $</p>
-                  </td>
-                  <td>
-                    <button className="btn btn-md rounded-circle bg-light border mt-4">
-                      <i className="fa fa-times text-danger" />
-                    </button>
-                  </td>
-                </tr>
+                    </td>
+                    <td>
+                      <p className="mb-0 mt-4">2.99 $</p>
+                    </td>
+                    <td>
+                      <button className="btn btn-md rounded-circle bg-light border mt-4">
+                        <i className="fa fa-times text-danger" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

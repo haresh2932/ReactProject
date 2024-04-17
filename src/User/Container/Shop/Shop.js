@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getProduct } from "../../../Redux/action/product.action";
 
 function Shop(props) {
   const [shopData, setShopData] = useState([]);
@@ -8,22 +10,14 @@ function Shop(props) {
   const [search, setSearchData] = useState("");
   const [protype, setProType] = useState("");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getData();
+    dispatch(getProduct());
   }, []);
 
-  const getData = async () => {
-    const response = await fetch("http://localhost:8000/product");
-    const data = await response.json();
-
-    let uniqueCategories = [...new Set(data.map((item) => item.name))];
-
-    let uniqtype = [...new Set(data.map((v) => v.type))];
-
-    setType(uniqtype);
-    setCatagory(uniqueCategories);
-    setShopData(data);
-  };
+  const product = useSelector((state) => state.product);
+  console.log(product);
 
   const lastData = () => {
     let finalData = shopData.filter((item) =>
@@ -37,7 +31,6 @@ function Shop(props) {
     }
   };
 
-  const enddata = lastData();
 
   return (
     <div>
@@ -279,7 +272,7 @@ function Shop(props) {
                 </div>
                 <div className="col-lg-9">
                   <div className="row g-4 justify-content-center">
-                    {enddata.map((v, i) => (
+                    {product.product.map((v, i) => (
                       <div className="col-md-6 col-lg-6 col-xl-4">
                         <Link to={`/shop/${v.id}`}>
                           <div className="rounded position-relative fruite-item">

@@ -6,7 +6,7 @@ function Header(props) {
   const cart = useSelector((state) => state.cart);
   console.log(cart);
 
-  const cartCount = cart.cart.reduce((total, item) => total + item.qty, 0);
+  const totalCartQty = cart.cart.reduce((acc, v) => acc + v.qty, 0);
 
   return (
     <div>
@@ -104,10 +104,11 @@ function Header(props) {
                   >
                     <i className="fas fa-search text-primary" />
                   </button>
-                  <a href="#" className="position-relative me-4 my-auto">
-                    <NavLink to="/cart">
-                      <i className="fa fa-shopping-bag fa-2x" />
-                    </NavLink>
+                  <NavLink
+                    to="/cart"
+                    className="position-relative me-4 my-auto"
+                  >
+                    <i className="fa fa-shopping-bag fa-2x" />
 
                     <span
                       className="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
@@ -118,9 +119,9 @@ function Header(props) {
                         minWidth: 20,
                       }}
                     >
-                      {cartCount}
+                      {totalCartQty}
                     </span>
-                  </a>
+                  </NavLink>
                   <a href="#" className="my-auto">
                     <i className="fas fa-user fa-2x" />
                   </a>
