@@ -1,7 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 function Header(props) {
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
+  const cartCount = cart.cart.reduce((total, item) => total + item.qty, 0);
+
   return (
     <div>
       <div>
@@ -99,10 +105,7 @@ function Header(props) {
                     <i className="fas fa-search text-primary" />
                   </button>
                   <a href="#" className="position-relative me-4 my-auto">
-                    <NavLink
-                      to="/cart"
-                      // className="dropdown-item"
-                    >
+                    <NavLink to="/cart">
                       <i className="fa fa-shopping-bag fa-2x" />
                     </NavLink>
 
@@ -115,7 +118,7 @@ function Header(props) {
                         minWidth: 20,
                       }}
                     >
-                      {}
+                      {cartCount}
                     </span>
                   </a>
                   <a href="#" className="my-auto">
