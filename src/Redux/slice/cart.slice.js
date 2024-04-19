@@ -15,7 +15,7 @@ const creatSlice = createSlice({
       const index = state.cart.findIndex((v) => v.pid === action.payload.id);
 
       if (index !== -1) {
-        state.cart[index].qty += action.payload.qty;
+        state.cart[index].qty +++;
       } else {
         state.cart.push({ pid: action.payload.id, qty: action.payload.qty });
       }
