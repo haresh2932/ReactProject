@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProduct } from "../../../Redux/action/product.action";
+import { addToCart } from "../../../Redux/slice/cart.slice";
 
 function Shop(props) {
   const [shopData, setShopData] = useState([]);
@@ -19,6 +20,14 @@ function Shop(props) {
   const product = useSelector((state) => state.product);
   console.log(product);
 
+  const Cart = useSelector((state) => state.Cart);
+  console.log(Cart);
+
+  const handalproduct = (id) => {
+    console.log(id);
+    dispatch(addToCart({ id, qty: 1 }));
+  };
+
   const lastData = () => {
     let finalData = shopData.filter((item) =>
       item.name.toLowerCase().includes(search)
@@ -30,7 +39,6 @@ function Shop(props) {
       return finalData;
     }
   };
-
 
   return (
     <div>
@@ -296,13 +304,13 @@ function Shop(props) {
                                 <p className="text-dark fs-5 fw-bold mb-0">
                                   $ {v.price} / kg
                                 </p>
-                                <a
+                                <Link
                                   href="#"
+                                  onClick={() => handalproduct(v.id)}
                                   className="btn border border-secondary rounded-pill px-3 text-primary"
                                 >
-                                  <i className="fa fa-shopping-bag me-2 text-primary" />{" "}
                                   Add to cart
-                                </a>
+                                </Link>
                               </div>
                             </div>
                           </div>

@@ -7,16 +7,37 @@ import { addToCart } from "../../../Redux/slice/cart.slice";
 
 function Shop_Details(props) {
   const [shopDetails, setShopDetails] = useState({});
+  const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
-
-  const cart = useSelector(state => state.cart)
-  console.log(cart);
-
   const { id } = useParams();
 
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
+  const product = useSelector((state) => state.product);
+  console.log(product);
+
+  const productdata = product.product.find((v) => v.id === id);
+
+  const cartData = cart.cart.filter((v) => v.pid === id);
+
+  const qtyData = cartData.map((v) => v.qty);
+
+  const fData = { ...productdata, qty: qtyData[0] };
+
   const handleCart = () => {
-    dispatch(addToCart(id))
-  }
+    dispatch(addToCart({ id, qty }));
+  };
+
+  const handleQtyPlus = () => {
+    setQty((prev) => prev + 1);
+  };
+
+  const handleQtyminus = () => {
+    if (qty > 1) {
+      setQty((prev) => prev - 1);
+    }
+  };
 
   try {
     useEffect(() => {
@@ -89,17 +110,24 @@ function Shop_Details(props) {
                     style={{ width: 100 }}
                   >
                     <div className="input-group-btn">
-                      <button className="btn btn-sm btn-minus rounded-circle bg-light border">
+                      <button
+                        onClick={() => handleQtyminus(id)}
+                        className="btn btn-sm btn-minus rounded-circle bg-light border"
+                      >
                         <i className="fa fa-minus" />
                       </button>
                     </div>
-                    <input
+                    <span
                       type="text"
                       className="form-control form-control-sm text-center border-0"
-                      defaultValue={1}
-                    />
+                    >
+                      {qty}
+                    </span>
                     <div className="input-group-btn">
-                      <button className="btn btn-sm btn-plus rounded-circle bg-light border">
+                      <button
+                        onClick={() => handleQtyPlus(id)}
+                        className="btn btn-sm btn-plus rounded-circle bg-light border"
+                      >
                         <i className="fa fa-plus" />
                       </button>
                     </div>

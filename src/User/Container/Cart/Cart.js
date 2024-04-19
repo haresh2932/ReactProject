@@ -1,27 +1,38 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementQty } from "../../../Redux/slice/cart.slice";
+import { decrementQty, incrementQty, removeProduct } from "../../../Redux/slice/cart.slice";
 
 function Cart(props) {
   const cart = useSelector((state) => state.cart);
   const products = useSelector((state) => state.product);
 
   console.log(cart, products);
-  
+
   const productData = cart.cart.map((v) => {
     const product = products.product.find((v1) => v1.id === v.pid);
-    
+
     return { ...product, qty: v.qty };
   });
-  
-  console.log(productData);
-  
-  const dispatch = useDispatch()
-  const countQty = useSelector(state => state.cart.count)
 
-  const handleCartQty = () => {
-    dispatch(incrementQty())
+  console.log(productData);
+
+  const subTotal = productData.reduce((acc, v) => acc + v.qty * v.price, 0);
+  const Total = subTotal * 1.18;
+  const dispatch = useDispatch();
+
+  const handleInc = (id) => {
+    console.log(id);
+    dispatch(incrementQty(id));
   };
+
+  const handleDec = (id) => {
+    console.log(id);
+    dispatch(decrementQty(id));
+  };
+
+  const handleRemove = (id) => {
+    dispatch(removeProduct(id))
+  }
 
   return (
     <div>
@@ -79,18 +90,22 @@ function Cart(props) {
                         style={{ width: 100 }}
                       >
                         <div className="input-group-btn">
-                          <button className="btn btn-sm btn-minus rounded-circle bg-light border">
+                          <button
+                            onClick={() => handleDec(p.id)}
+                            className="btn btn-sm btn-minus rounded-circle bg-light border"
+                          >
                             <i className="fa fa-minus" />
                           </button>
                         </div>
-                        <input
+                        <span
                           type="text"
                           className="form-control form-control-sm text-center border-0"
-                          defaultValue={countQty}
-                        />
+                        >
+                          {p.qty}
+                        </span>
                         <div className="input-group-btn">
                           <button
-                            onClick={handleCartQty}
+                            onClick={() => handleInc(p.id)}
                             className="btn btn-sm btn-plus rounded-circle bg-light border"
                           >
                             <i className="fa fa-plus" />
@@ -99,10 +114,13 @@ function Cart(props) {
                       </div>
                     </td>
                     <td>
-                      <p className="mb-0 mt-4">2.99 $</p>
+                      <p className="mb-0 mt-4">{p.qty * p.price} $</p>
                     </td>
                     <td>
-                      <button className="btn btn-md rounded-circle bg-light border mt-4">
+                      <button 
+                        onClick={() => handleRemove(p.id)}
+                        className="btn btn-md rounded-circle bg-light border mt-4"
+                      >
                         <i className="fa fa-times text-danger" />
                       </button>
                     </td>
@@ -134,19 +152,19 @@ function Cart(props) {
                   </h1>
                   <div className="d-flex justify-content-between mb-4">
                     <h5 className="mb-0 me-4">Subtotal:</h5>
-                    <p className="mb-0">$96.00</p>
+                    <p className="mb-0">${subTotal}</p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <h5 className="mb-0 me-4">Shipping</h5>
                     <div className>
-                      <p className="mb-0">Flat rate: $3.00</p>
+                      <p className="mb-0">Flat rate: $1.18</p>
                     </div>
                   </div>
                   <p className="mb-0 text-end">Shipping to Ukraine.</p>
                 </div>
                 <div className="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                   <h5 className="mb-0 ps-4 me-4">Total</h5>
-                  <p className="mb-0 pe-4">$99.00</p>
+                  <p className="mb-0 pe-4">{Total}</p>
                 </div>
                 <button
                   className="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
